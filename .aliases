@@ -1,0 +1,66 @@
+# -*- mode: shell-script -*-
+# edit etc file
+alias eh="sudo emacs /etc/hosts"
+alias es="sudo emacs /etc/sudoers"
+
+# system
+alias tf='tail -f'
+alias ps='ps auxw'
+alias algr='alias | grep -i'
+alias .du='du -d1 -h'
+alias sk='sudo kill -SIGTERM'
+
+# utility
+alias reload='source $HOME/.zshrc'
+alias e='exit'
+alias k="kill -SIGTERM"
+
+# Common -- Some are from Damian Conway
+alias a='ls -A' # -A all except literal . ..
+alias la="ls -A -l -G"
+alias c='clear'
+alias cdd='cd -'  # goto last dir cd'ed from
+alias cl='clear; l'
+
+function cdc() {
+    cd $1; ls
+}
+
+alias cls='clear; ls'
+alias h='history'
+alias l.='ls -d .[^.]*'
+alias l='ls -lhGt'  # -l long listing, most recent first
+                    # -G color
+alias lh="ls -lh"
+alias ll='ls -lhG'  # -l long listing, human readable, no group info
+alias lt='ls -lt' # sort with recently modified first
+alias lg='l | grep -i'
+alias lg.='l. | grep -i'
+alias md='mkdir -p'
+alias s='cd ..'   # up one dir
+
+function take() {
+    mkdir -p "$1"
+    cd "$1"
+}
+
+function f() {
+    find . -iname "*$1*"
+}
+
+function killnamed () {
+    ps | grep -i $1 | grep -v grep | awk '{print $2}' | xargs kill -SIGTERM
+}
+
+function psg () {
+    ps | grep -iE $1 | grep -v grep
+}
+
+function greptext() {
+    if [ ! -z $2 ]; then
+        context=$2;
+    else
+        context=2;
+    fi
+    grep $1 -irn -C$context .
+}
